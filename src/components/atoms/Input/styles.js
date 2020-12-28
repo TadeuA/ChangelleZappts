@@ -8,5 +8,6 @@ export const Input = styled.input`
   padding-bottom:11px;
   letter-spacing: 0px;
   font: ${({ theme }) => theme.fonts['muli-regular-16']};
-  color: ${({ theme }) => theme.colors['black']}
+  color: ${({ theme }) => theme.colors['black']};
+  margin-bottom:16px;
 `

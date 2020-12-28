@@ -18,6 +18,7 @@ export const Button = styled.button`
     color:${({theme}) => theme.colors['black']};
     display:flex;
     align-items:center;
+    font:${({theme}) => theme.fonts['lato-regular']};
     img{
       width:29px;
       height:29px;

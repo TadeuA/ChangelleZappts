@@ -1,6 +1,22 @@
 import styled from 'styled-components'
 import {Carousel} from 'react-responsive-carousel'
 
+let Width;
+let screenHeight
+function sizeOfThings() {
+  // eslint-disable-next-line no-restricted-globals
+  const screenWidth = screen.width;
+  // eslint-disable-next-line no-restricted-globals
+  screenHeight = screen.height;
+
+  Width = screenWidth/2
+}
+
+sizeOfThings();
+
+window.addEventListener("resize", function () {
+  sizeOfThings();
+});
 export const CustomCarousel = styled(Carousel)`
 
   .carousel-root {
@@ -9,7 +25,8 @@ export const CustomCarousel = styled(Carousel)`
 
   .carousel {
     position: relative;
-    width: 100%;
+    width:${Width};
+    
     // only applying box sizing inside the plugin so it won't break any style
     * {
         -webkit-box-sizing: border-box;
@@ -72,7 +89,7 @@ export const CustomCarousel = styled(Carousel)`
     margin: 0;
     position: relative;
     text-align: center;
-    background: #A9C5BA;
+    background: ${({theme})=>theme.colors['transparent']};
     padding-bottom:32px;
     padding-left:20%;
     padding-right:20%;
@@ -108,8 +125,8 @@ export const CustomCarousel = styled(Carousel)`
     .dot {
       @include transition(opacity, 0.25s, ease-in);
       @include opacity(0.3);
-      box-shadow: 1px 1px 2px rgba(#000, 0.9);
-      background: #fff;
+      box-shadow: 1px 1px 2px rgba(0,0,0, 0.29);
+      background: ${({theme})=>theme.colors['white']};
       border-radius: 50px;
       width: 11px;
       height: 11px;
