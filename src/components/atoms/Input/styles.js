@@ -10,4 +10,9 @@ export const Input = styled.input`
   font: ${({ theme }) => theme.fonts['muli-regular-16']};
   color: ${({ theme }) => theme.colors['black']};
   margin-bottom:16px;
+  transition: border 0.2s linear;
+  &.warning {
+    border-bottom:2px solid ${({ theme }) => theme.colors['red']};
+
+  }
 `

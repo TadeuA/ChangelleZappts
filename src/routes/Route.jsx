@@ -2,6 +2,7 @@ import React from "react";
 import { Route as CustomRoute } from "react-router-dom";
 import Carousel from "../components/molecules/Carousel";
 import slides from "../utils/slides";
+import { Div, Main } from "./styles";
 const Route = ({ isPrivate = false, component: Component, ...rest }) => {
   return (
     <CustomRoute
@@ -12,10 +13,12 @@ const Route = ({ isPrivate = false, component: Component, ...rest }) => {
             <Component />
           </>
         ) : (
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
+          <Div>
             <Carousel slides={slides} />
-            <Component />
-          </div>
+            <Main>
+              <Component />
+            </Main>
+          </Div>
         );
       }}
     />

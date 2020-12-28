@@ -6,9 +6,10 @@ function Button({
   type = "button",
   className = "",
   children,
+  style = {},
 }) {
   return (
-    <Bu onClick={onClick} type={type} className={className}>
+    <Bu onClick={onClick} type={type} className={className} style={style}>
       {children}
     </Bu>
   );

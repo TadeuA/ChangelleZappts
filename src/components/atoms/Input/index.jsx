@@ -9,16 +9,18 @@ function Input({
   type = "text",
   className = "",
   placeholder = "",
+  style = {},
 }) {
   return (
     <In
-      // value={value}
-      // onChange={(event) => onChange(event.target.value)}
+      value={value}
+      onChange={(event) => onChange(event.target.value)}
       onFocus={onFocus}
       onBlur={onBlur}
       type={type}
       className={className}
       placeholder={placeholder}
+      style={style}
     />
   );
 }
