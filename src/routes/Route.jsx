@@ -14,9 +14,9 @@ const Route = ({ isPrivate = false, component: Component, ...rest }) => {
           </>
         ) : (
           <Div>
-            <Carousel slides={slides} />
+            <Carousel slides={slides} style={{ gridArea: "carousel" }} />
             <Main>
-              <Component />
+              <Component style={{ gridArea: "forms" }} />
             </Main>
           </Div>
         );

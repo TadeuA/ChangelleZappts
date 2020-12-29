@@ -24,7 +24,15 @@ export const CustomCarousel = styled(Carousel)`
   .carousel {
     position: relative;
     width:${Width};
-    
+    @media(max-width:500px){
+      max-width:500px;
+    }
+    @media(max-width:1500px){
+      max-width:600px;
+    }
+    @media(max-width:1150px){
+      max-width:500px;
+    }
     // only applying box sizing inside the plugin so it won't break any style
     * {
         -webkit-box-sizing: border-box;
@@ -109,7 +117,7 @@ export const CustomCarousel = styled(Carousel)`
       font:${({theme}) => theme.fonts['muli-regular-20']};
 
     }
-
+   
   }
   .control-dots {
     position: relative;
