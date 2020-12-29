@@ -6,8 +6,9 @@ import Form from "../../atoms/Form";
 import Google from "../../../assets/icons/googleLogo.svg";
 import { isValidEmail, isValidPass } from "../../../common/checkers";
 import { useToast } from "../../../hooks";
-
+import { useHistory } from "react-router-dom";
 export default function LogIn() {
+  const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [badPass, setBadPass] = useState(false);
@@ -50,6 +51,7 @@ export default function LogIn() {
         }
         return;
       }
+      history.push("/home");
     },
     [email, password, addToast, setBadEmail, setBadPass]
   );
