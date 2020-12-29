@@ -1,8 +1,7 @@
 import React from "react";
-import { AuthProvider, useAuth } from "./auth";
 import { ThemeProvider } from "styled-components";
 import { Theme } from "../styles/themes/default";
-
+import { ToastProvider, useToast } from "./toast";
 import GlobalStyles from "../styles/global";
 
 export function AppProvider({ children }) {
@@ -10,10 +9,10 @@ export function AppProvider({ children }) {
     <>
       <GlobalStyles />
       <ThemeProvider theme={Theme}>
-        <AuthProvider>{children}</AuthProvider>
+        <ToastProvider>{children}</ToastProvider>
       </ThemeProvider>
     </>
   );
 }
 
-export { useAuth };
+export { useToast };

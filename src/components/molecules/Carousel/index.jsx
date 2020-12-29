@@ -8,11 +8,11 @@ export default function CompleteCarousel({
     <Div>
       <Carousel>
         {slides.map((slide) => (
-          <>
-            <img key={slide.key} src={slide.image} alt={slide.title} />
+          <div key={slide.key}>
+            <img src={slide.image} alt={slide.title} />
             <h3 className="title">{slide.title}</h3>
             <p className="description">{slide.description}</p>
-          </>
+          </div>
         ))}
       </Carousel>
     </Div>

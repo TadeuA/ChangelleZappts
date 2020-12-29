@@ -2,12 +2,10 @@ import styled from 'styled-components'
 import {Carousel} from 'react-responsive-carousel'
 
 let Width;
-let screenHeight
 function sizeOfThings() {
   // eslint-disable-next-line no-restricted-globals
   const screenWidth = screen.width;
   // eslint-disable-next-line no-restricted-globals
-  screenHeight = screen.height;
 
   Width = screenWidth/2
 }

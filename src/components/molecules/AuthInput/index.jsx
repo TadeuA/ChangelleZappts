@@ -1,7 +1,8 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import Input from "../../atoms/Input";
 import Label from "../../atoms/Label";
 import { Div } from "./styles";
+import { useToast } from "../../../hooks";
 export default function AuthInput({
   value = "",
   onChange = () => {},
@@ -12,13 +13,35 @@ export default function AuthInput({
   placeholder = "",
   description = "",
   style = {},
+  validate = true,
   onValidate = () => {},
+  badToast = {
+    title: "",
+    description: "",
+  },
+  submitting,
+  setState = () => {},
 }) {
   const [badValidation, setBadValidations] = useState("");
 
+  const { addToast } = useToast();
+  useEffect(() => {
+    if (submitting) {
+      setBadValidations("warning");
+      setState(false);
+    }
+  }, [submitting, setState]);
   const handleValidation = useCallback(() => {
-    if (!onValidate(value)) setBadValidations("warning");
-  }, [setBadValidations, value, onValidate]);
+    if (!onValidate(value)) {
+      setBadValidations("warning");
+      addToast({
+        title: badToast.title,
+        type: "error",
+        description: badToast.description,
+      });
+    }
+  }, [setBadValidations, value, onValidate, badToast, addToast]);
+
   return (
     <Div>
       <Label>{description}</Label>
@@ -28,7 +51,7 @@ export default function AuthInput({
         onFocus={() => {
           setBadValidations();
         }}
-        onBlur={() => handleValidation()}
+        onBlur={() => validate && handleValidation()}
         type={type}
         className={badValidation}
         placeholder={placeholder}

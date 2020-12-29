@@ -5,19 +5,54 @@ import Or from "../../molecules/Or";
 import Form from "../../atoms/Form";
 import Google from "../../../assets/icons/googleLogo.svg";
 import { isValidEmail, isValidPass } from "../../../common/checkers";
+import { useToast } from "../../../hooks";
 
 export default function LogIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [badPass, setBadPass] = useState(false);
+  const [badEmail, setBadEmail] = useState(false);
+  const { addToast } = useToast();
 
   const handleLogIn = useCallback(
     (event) => {
       event.preventDefault();
-      console.log(email + password);
+      if (email === "" || password === "") {
+        addToast({
+          title: "Empty field",
+          type: "info",
+          description: "No fields cannot be empty",
+        });
+        if (email === "") {
+          setBadEmail(true);
+        }
+        if (password === "") {
+          setBadPass(true);
+        }
+        return;
+      }
+      if (!isValidEmail(email) || !isValidPass(password)) {
+        if (!isValidEmail(email)) {
+          addToast({
+            title: "Bad email",
+            type: "error",
+            description: "The email is incorrect",
+          });
+          setBadEmail(true);
+        }
+        if (!isValidPass(password)) {
+          addToast({
+            title: "Bad password",
+            type: "error",
+            description: "The password is incorrect",
+          });
+          setBadPass(true);
+        }
+        return;
+      }
     },
-    [email, password]
+    [email, password, addToast, setBadEmail, setBadPass]
   );
-
   return (
     <Form onSubmit={handleLogIn}>
       <Input
@@ -26,13 +61,18 @@ export default function LogIn() {
         onChange={setEmail}
         style={{ textTransform: "lowercase" }}
         onValidate={isValidEmail}
+        badToast={{ title: "Bad email", description: "The email is incorrect" }}
+        submitting={badEmail}
+        setState={setBadEmail}
       />
       <Input
         description="Password"
         value={password}
         onChange={setPassword}
         type="password"
-        onValidate={isValidPass}
+        validate={false}
+        submitting={badPass}
+        setState={setBadPass}
       />
       <Button className="subAction" style={{ alignSelf: "flex-end" }}>
         Forgot Password?
