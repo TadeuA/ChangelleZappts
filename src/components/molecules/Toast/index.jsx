@@ -32,7 +32,7 @@ export default function Toast({ message, style }) {
   return (
     <Container
       type={message.type}
-      hasDescription={!message.description}
+      hasdescription={message.description}
       style={style}
     >
       {icons[message.type || "info"]}
@@ -43,7 +43,11 @@ export default function Toast({ message, style }) {
         )}
       </div>
 
-      <button type="button" onClick={() => removeToast(message.id)}>
+      <button
+        type="button"
+        onClick={() => removeToast(message.id)}
+        data-testid="button-toast"
+      >
         <FiXCircle size={18} />
       </button>
     </Container>

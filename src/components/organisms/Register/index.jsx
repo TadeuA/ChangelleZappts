@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from "react";
+import { useHistory } from "react-router-dom";
 import Input from "../../molecules/AuthInput";
 import Button from "../../atoms/Button";
 import Or from "../../molecules/Or";
@@ -10,8 +11,8 @@ import {
   isValidName,
 } from "../../../common/checkers";
 import { useToast } from "../../../hooks";
-
 export default function Register() {
+  const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -25,18 +26,12 @@ export default function Register() {
       if (email === "" || password === "" || name === "") {
         addToast({
           title: "Empty field",
-          type: "error",
+          type: "info",
           description: "No fields cannot be empty",
         });
-        if (email === "") {
-          setBadEmail(true);
-        }
-        if (password === "") {
-          setBadPass(true);
-        }
-        if (name === "") {
-          setBadName(true);
-        }
+        setBadEmail(email ? false : true);
+        setBadPass(password ? false : true);
+        setBadName(name ? false : true);
       }
       if (
         !isValidEmail(email) ||
@@ -67,15 +62,32 @@ export default function Register() {
           });
           setBadPass(true);
         }
+
         return;
       }
+      addToast({
+        title: "Registration done",
+        type: "success",
+        description: "You can now log in to Invision",
+      });
+      history.push("/signin");
     },
-    [email, password, addToast, setBadEmail, setBadPass, name, setBadName]
+    [
+      email,
+      password,
+      addToast,
+      setBadEmail,
+      setBadPass,
+      name,
+      setBadName,
+      history,
+    ]
   );
 
   return (
     <Form onSubmit={handleRegister}>
       <Input
+        id="user-name"
         description="Full Name"
         value={name}
         onChange={setName}
@@ -84,10 +96,11 @@ export default function Register() {
         setState={setBadName}
         badToast={{
           title: "Bad name",
-          description: "The name is incorrect",
+          description: "The name is no valid",
         }}
       />
       <Input
+        id="email"
         description="Users name or Email"
         value={email}
         onChange={setEmail}
@@ -98,6 +111,7 @@ export default function Register() {
         setState={setBadEmail}
       />
       <Input
+        id="password"
         description="Create Password"
         value={password}
         onChange={setPassword}

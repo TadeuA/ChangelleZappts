@@ -41,8 +41,8 @@ export const Container = styled(animated.div)`
     background: ${({theme})=>theme.colors['transparent']};
     color: inherit;
   }
-  ${({hasDescription}) =>
-    !hasDescription &&
+  ${({hasdescription}) =>
+    !!(!hasdescription) &&
     css`
       align-items: center;
       svg {

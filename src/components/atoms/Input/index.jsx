@@ -10,9 +10,11 @@ function Input({
   className = "",
   placeholder = "",
   style = {},
+  id,
 }) {
   return (
     <In
+      id={id}
       value={value}
       onChange={(event) => onChange(event.target.value)}
       onFocus={onFocus}

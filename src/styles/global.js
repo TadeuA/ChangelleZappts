@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-import {Theme} from './themes/default'
+
 export default createGlobalStyle`
   *{
     margin:0;
@@ -10,14 +10,14 @@ export default createGlobalStyle`
 
   body{
   
-    background:${Theme.colors['black']};
-    color: ${Theme.colors['dark-gray']};
+    background:${({theme})=>theme.colors['black']};
+    color: ${({theme})=>theme.colors['dark-gray']};
 
     --webkit-font-smoothing: antialiased;
   }
 
   body, input, button{
-    font: ${Theme.fonts['muli-regular-16']};
+    font: ${({theme})=>theme.fonts['muli-regular-16']};
   }
   #root{
     
@@ -29,6 +29,6 @@ export default createGlobalStyle`
     cursor: pointer;
   }
   a{
-    color :${Theme.colors['cyan']}
+    color :${({theme})=>theme.colors['cyan']}
   }
 `;

@@ -24,12 +24,11 @@ export default function LogIn() {
           type: "info",
           description: "No fields cannot be empty",
         });
-        if (email === "") {
-          setBadEmail(true);
-        }
-        if (password === "") {
-          setBadPass(true);
-        }
+
+        setBadEmail(email ? false : true);
+
+        setBadPass(password ? false : true);
+
         return;
       }
       if (!isValidEmail(email) || !isValidPass(password)) {
@@ -53,7 +52,7 @@ export default function LogIn() {
       }
       history.push("/home");
     },
-    [email, password, addToast, setBadEmail, setBadPass]
+    [email, password, addToast, setBadEmail, setBadPass, history]
   );
   return (
     <Form onSubmit={handleLogIn}>
@@ -66,6 +65,7 @@ export default function LogIn() {
         badToast={{ title: "Bad email", description: "The email is incorrect" }}
         submitting={badEmail}
         setState={setBadEmail}
+        id="email"
       />
       <Input
         description="Password"
@@ -75,6 +75,7 @@ export default function LogIn() {
         validate={false}
         submitting={badPass}
         setState={setBadPass}
+        id="password"
       />
       <Button className="subAction" style={{ alignSelf: "flex-end" }}>
         Forgot Password?

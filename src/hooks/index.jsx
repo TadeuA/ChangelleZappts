@@ -1,14 +1,11 @@
 import React from "react";
-import { ThemeProvider } from "styled-components";
-import { Theme } from "../styles/themes/default";
-import { ToastProvider, useToast } from "./toast";
-import GlobalStyles from "../styles/global";
+import { ToastProvider, useToast } from "./Toast";
+import ThemeProvider from "./Theme";
 
 export function AppProvider({ children }) {
   return (
     <>
-      <GlobalStyles />
-      <ThemeProvider theme={Theme}>
+      <ThemeProvider>
         <ToastProvider>{children}</ToastProvider>
       </ThemeProvider>
     </>

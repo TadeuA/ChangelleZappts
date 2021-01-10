@@ -17,15 +17,17 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --env=jsdom",
+    "test:coverage": "react-scripts test --coverage --watchAll false",
     "eject": "react-scripts eject"
   },
-  "jest":{
-    "collectCoverageFrom":[
+  "jest": {
+    "collectCoverageFrom": [
       "src/pages/**/*.jsx",
       "src/components/**/*.jsx",
       "src/hooks/*.jsx",
-      "!src/hooks/index.jsx"
+      "!src/hooks/index.jsx",
+      "!src/__tests__/CustomMethodsTesting.jsx"
     ]
   },
   "eslintConfig": {
@@ -47,9 +49,10 @@
     ]
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/jest-dom": "^5.11.8",
     "@testing-library/react": "^11.2.2",
-    "@testing-library/react-hooks": "^3.7.0",
-    "@testing-library/user-event": "^12.1.10"
+    "@testing-library/react-hooks": "^4.0.0",
+    "@testing-library/user-event": "^12.1.10",
+    "react-test-renderer": "^17.0.1"
   }
 }

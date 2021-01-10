@@ -4,23 +4,18 @@ import Label from "../../atoms/Label";
 import { Div } from "./styles";
 import { useToast } from "../../../hooks";
 export default function AuthInput({
-  value = "",
+  value,
   onChange = () => {},
-  onFocus = () => {},
-  onBlur = () => {},
   type = "text",
-  className = "",
   placeholder = "",
   description = "",
-  style = {},
-  validate = true,
+  style,
+  validate,
   onValidate = () => {},
-  badToast = {
-    title: "",
-    description: "",
-  },
+  badToast = { title: "Empty field", description: "No fields cannot be empty" },
   submitting,
   setState = () => {},
+  id = "",
 }) {
   const [badValidation, setBadValidations] = useState("");
 
@@ -44,18 +39,19 @@ export default function AuthInput({
 
   return (
     <Div>
-      <Label>{description}</Label>
+      <Label reference={id}>{description}</Label>
       <Input
         value={value}
         onChange={onChange}
         onFocus={() => {
           setBadValidations();
         }}
-        onBlur={() => validate && handleValidation()}
+        onBlur={() => !validate && handleValidation()}
         type={type}
         className={badValidation}
         placeholder={placeholder}
         style={style}
+        id={id}
       />
     </Div>
   );
