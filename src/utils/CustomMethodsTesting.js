@@ -7,7 +7,7 @@ const Providers = ({ children }) => {
 };
 
 const customRenderers = (component, options) =>
-  render(component, { wrapper: Providers });
+  render(component, { wrapper: Providers,...options });
 
 export * from "@testing-library/react";
 
